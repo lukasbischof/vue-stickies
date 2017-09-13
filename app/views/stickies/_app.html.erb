@@ -1,0 +1,29 @@
+<div id="app">
+  <div>
+    <button class="uk-button uk-button-default"
+            v-on:click="addSticky"
+            v-bind:disabled="error_occurred">Add Sticky</button>
+    <button class="uk-button uk-button-primary"
+            v-on:click="save"
+            v-bind:disabled="error_occurred">Save</button>
+  </div>
+
+  <br /><br>
+
+  <div id="container">
+    <div v-if="stickies.length > 0">
+      <h3>Sticky of the day</h3>
+      <div class="uk-child-with-1-5@l" uk-grid>
+        <sticky :sticky="stickies[0]"></sticky>
+      </div>
+    </div>
+    <h3>All Stickies</h3>
+    <h3 class="notice" v-if="stickies.length == 0">{{ status }}</h3>
+    <div v-if="stickies.length > 0" class="uk-child-width-1-2@s uk-child-width-1-3@m uk-child-width-1-5@l" uk-grid>
+      <sticky :sticky="sticky"
+              :key="sticky.id"
+              v-for="sticky in stickies"
+              v-on:delete="deleteButtonPressed"></sticky>
+    </div>
+  </div>
+</div>

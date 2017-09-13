@@ -1,0 +1,15 @@
+<script type="text/x-template" id="sticky-template">
+  <div class="uk-card uk-card-default">
+    <div class="uk-card-body">
+      <input class="uk-input" type="text" v-model="sticky.title" />
+      <textarea class="uk-textarea" v-model="sticky.content"></textarea>
+    </div>
+    <div class="uk-card-footer">
+      <button class="uk-button uk-button-danger" v-on:click="deleteButtonPressed">Delete</button>
+    </div>
+  </div>
+</script>
+
+<h1>Stickies with Vue</h1>
+
+<%= render 'app' %>
