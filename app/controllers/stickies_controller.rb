@@ -23,7 +23,7 @@ class StickiesController < ApplicationController # :nodoc:
   def destroy
     success = Sticky.find(params.require(:id)).destroy
     respond_to do |format|
-      format.json { render json: { success: success.to_s } }
+      format.json { render json: { success: (!success.nil?).to_s } }
     end
   end
 

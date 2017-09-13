@@ -1,11 +1,27 @@
 <script type="text/x-template" id="sticky-template">
-  <div class="uk-card uk-card-default">
+  <div class="uk-card uk-card-default" uk-scrollspy="cls:uk-animation-fade; repeat: true">
     <div class="uk-card-body">
-      <input class="uk-input" type="text" v-model="sticky.title" />
-      <textarea class="uk-textarea" v-model="sticky.content"></textarea>
+      <div v-if="editing">
+        <input class="uk-input"
+               type="text"
+               v-model="sticky.title"
+               placeholder="Title"
+               v-bind:ref="'title-input-' + sticky.id" />
+        <textarea class="uk-textarea" v-model="sticky.content" placeholder="Content"></textarea>
+      </div>
+      <div v-if="!editing">
+        <h3>{{ sticky.title }}</h3>
+        <p>{{ sticky.content }}</p>
+      </div>
     </div>
     <div class="uk-card-footer">
-      <button class="uk-button uk-button-danger" v-on:click="deleteButtonPressed">Delete</button>
+      <div class="uk-button-group">
+        <button class="uk-button uk-button-default" v-on:click="toggleEditingMode()">{{ editButtonTitle }}</button>
+        <button class="uk-button uk-button-danger"
+                v-on:click="deleteButtonPressed"
+                v-if="!editing"
+                title="Delete Sticky">Delete</button>
+      </div>
     </div>
   </div>
 </script>

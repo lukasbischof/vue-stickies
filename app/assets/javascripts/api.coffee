@@ -1,17 +1,20 @@
 window.RailsAPI = ->
-  this.updateStickies = (data, callback) ->
-    $.ajax({
-      type: 'POST',
-      url: 'stickies',
-      dataType: 'json',
-      contentType: 'application/json',
-      data: JSON.stringify({ stickies: data }),
-      success: (data, status) ->
-        console.log(data)
-        console.log(status)
-        callback(data) if !!callback
-    })
-    undefined
+  this.updateStickies = (data) ->
+    new Promise (resolve, reject) ->
+      $.ajax({
+        type: 'POST',
+        url: 'stickies',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify({ stickies: data }),
+        success: (data, status) ->
+          console.log(data)
+          console.log(status)
+          resolve(data)
+        ,
+        error: (xhr, status) ->
+          reject(new Error(xhr + " responded with " + status))
+      })
 
   this.loadStickies = () ->
     new Promise (resolve, reject) ->

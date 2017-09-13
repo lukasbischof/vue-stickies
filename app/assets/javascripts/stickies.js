@@ -14,11 +14,18 @@
       data.push({ id: key, title: changedStickies[key].title, content: changedStickies[key].content })
     }
 
-    api.updateStickies(data, function(data) {
+    api.updateStickies(data).then(function(data) {
       UIkit.notification({
         message: 'Stickies saved',
         status: 'success'
       });
+    }, function(error) {
+      UIkit.notification({
+        message: "Can't update stickies",
+        status: 'danger'
+      });
+
+      throw error;
     });
   }
 
@@ -26,6 +33,13 @@
     Vue.component('sticky', {
       props: ['sticky'],
       template: '#sticky-template',
+
+      data: function() {
+        return {
+          editing: false,
+          editButtonTitle: 'Edit',
+        };
+      },
 
       watch: {
         sticky: {
@@ -40,6 +54,16 @@
       methods: {
         deleteButtonPressed: function(e) {
           this.$emit('delete', this, e);
+        },
+        toggleEditingMode: function() {
+          this.editing = !this.editing;
+          this.editButtonTitle = this.editing ? 'Done' : 'Edit';
+          if (this.editing) {
+            this.$nextTick(function() {
+              // $refs is an array with all references in the template code
+              this.$refs['title-input-' + this.sticky.id].focus();
+            });
+          }
         }
       }
     })
@@ -65,9 +89,28 @@
         deleteButtonPressed: function(child, e) {
           UIkit.modal.confirm('Do you really want to delete this sticky note?').then(function() {
             // Confirmed => delete sticky
+
+            var delSticky = function(stickyToDelete) {
+              for (var i = 0; i < app.stickies.length; ++i) {
+                var sticky = app.stickies[i];
+                if (sticky.id === stickyToDelete.id) {
+                  app.stickies.splice(i, 1);
+                  UIkit.notification("Successfully deleted sticky", { status: 'success' });
+                  return;
+                }
+              }
+            };
+
+            // Sticky isn't in the DB yet
+            if (child.sticky.id < 0) {
+              delSticky(child.sticky);
+              return;
+            }
+
             api.deleteSticky(child.sticky.id).then(function(data) {
-              // TODO: DELETE
+              delSticky(child.sticky);
             }, function(err) {
+              UIkit.notification("Couldn't delete sticky", { status: 'warning' })
               throw err;
             });
           }, function () {
