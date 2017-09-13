@@ -14,14 +14,11 @@
  *= require_self
  */
 
-* {
-  box-sizing: border-box;
-}
+ * {
+ 	box-sizing: content-box;
+ }
 
-body {
-  box-sizing: border-box;
-}
-
-main {
-  padding: 60px;
-}
+ main {
+ 	margin: 60px;
+ 	min-height: 100%;
+ }

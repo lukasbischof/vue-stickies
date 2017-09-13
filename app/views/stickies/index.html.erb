@@ -1,5 +1,5 @@
 <script type="text/x-template" id="sticky-template">
-  <div class="uk-card uk-card-default" uk-scrollspy="cls:uk-animation-fade; repeat: true">
+  <div class="uk-card uk-card-default" uk-scrollspy="cls:uk-animation-fade">
     <div class="uk-card-body">
       <div v-if="editing">
         <input class="uk-input"
@@ -10,8 +10,8 @@
         <textarea class="uk-textarea" v-model="sticky.content" placeholder="Content"></textarea>
       </div>
       <div v-if="!editing">
-        <h3>{{ sticky.title }}</h3>
-        <p>{{ sticky.content }}</p>
+        <h3>{{ sticky.title.length > 0 ? sticky.title : 'No Title' }}</h3>
+        <p class="sticky-content">{{ sticky.content.length > 0 ? sticky.content : 'No content yet' }}</p>
       </div>
     </div>
     <div class="uk-card-footer">

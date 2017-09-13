@@ -371,7 +371,7 @@ blockquote footer {
   color: #666;
 }
 blockquote footer::before {
-  content: "— ";
+  content: "â€” ";
 }
 /* Preformatted text
  ========================================================================== */
@@ -6553,7 +6553,7 @@ ul.uk-nav-sub {
   width: 1px;
 }
 /*
- * 1. Make `width: 1px` work, because according to the spec flex items won’t shrink
+ * 1. Make `width: 1px` work, because according to the spec flex items wonâ€™t shrink
  *    below their minimum content size. To change this, set the min-width.
  *    Only needed for Firefox. All other browsers ignore this.
  *
