@@ -1,24 +1,23 @@
-# README
+# Vue-Stickies
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A sticky notes application made with Rails and Vue.js
 
-Things you may want to cover:
+## Setup
 
-* Ruby version
+```sh
+git clone git@github.com:lukasbischof/vue-stickies.git
+cd vue-stickies
+bin/setup
+```
 
-* System dependencies
+### Configuration
 
-* Configuration
+Configure the following:
 
-* Database creation
+* config/application.yml
 
-* Database initialization
+### Run
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```sh
+rails s
+```
