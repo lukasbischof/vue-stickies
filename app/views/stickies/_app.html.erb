@@ -14,7 +14,7 @@
     <div v-if="stickies.length > 0">
       <h3>Sticky of the day</h3>
       <div class="uk-child-with-1-5@l" uk-grid>
-        <sticky :sticky="stickies[0]"></sticky>
+        <sticky :sticky="stickies[0]" v-on:delete="deleteButtonPressed"></sticky>
       </div>
     </div>
     <h3>All Stickies</h3>
