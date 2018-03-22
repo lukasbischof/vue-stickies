@@ -19,5 +19,5 @@ Configure the following:
 ### Run
 
 ```sh
-rails s
+rails server
 ```
